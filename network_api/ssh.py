@@ -21,7 +21,8 @@ async def device_cli(host: str, device_type: str, commands: list) -> dict:
         for command in commands:
 
             data = await device.send_command(command)
-            results[command] = parse_output(platform=device_type, command=command, data=data)
+            results[command] = parse_output(
+                platform=device_type, command=command, data=data
+            )
 
         return results
-
