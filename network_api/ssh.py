@@ -1,28 +1,29 @@
-import asyncio
 from os import environ
 
-import netdev
-from ntc_templates.parse import parse_output
+from netmiko import ConnectHandler
+
+from network_api.models import DeviceTypes
 
 
-async def device_cli(host: str, device_type: str, commands: list) -> dict:
+def device_cli(
+    host: str,
+    device_type: DeviceTypes,
+    command: str,
+    username: str = environ.get("SSH_USER"),
+    password: str = environ.get("SSH_PASS"),
+    use_genie: bool = False,
+) -> dict:
 
-    params = {
-        "host": host,
-        "device_type": device_type,
-        "username": environ.get("USERNAME"),
-        "password": environ.get("PASSWORD"),
-    }
+    with ConnectHandler(
+        host=host,
+        device_type=device_type,
+        username=username,
+        password=password,
+    ) as conn:
 
-    async with netdev.create(**params) as device:
+        results = conn.send_command(
+            command,
+            use_genie=use_genie,
+        )
 
-        results = dict()
-
-        for command in commands:
-
-            data = await device.send_command(command)
-            results[command] = parse_output(
-                platform=device_type, command=command, data=data
-            )
-
-        return results
+    return results

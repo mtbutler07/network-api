@@ -1,0 +1,25 @@
+[tool.poetry]
+authors = ["Marcus Butler <mtbutler07@gmail.com>"]
+description = "RESTful API for the Network"
+license = "MIT"
+name = "network_api"
+version = "0.1.0"
+
+[tool.poetry.dependencies]
+fastapi = "^0.63.0"
+genie = "^21.3.1"
+netmiko = "^3.3.3"
+pyats = "^21.3"
+pydantic = "^1.8.1"
+python = "^3.8"
+uvicorn = {extras = ["standard"], version = "^0.13.4"}
+
+[tool.poetry.dev-dependencies]
+black = "^20.8b1"
+flake8 = "^3.9.0"
+isort = "^5.8.0"
+pre-commit = "^2.12.0"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]

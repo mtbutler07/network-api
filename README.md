@@ -1,34 +1,29 @@
 # Network API
 
-The Network API is a proof of concept created to simplify the means of collecting structured data from networking equipment through the use of a RESTful HTTP API using [FastAPI](https://github.com/tiangolo/fastapi).
+Network API is a proof of concept web service built using [FastAPI](https://github.com/tiangolo/fastapi).
 
-Device connections are established through SSH since most organizations do not enable the built-in APIs of networking equipment. This is accomplished through the asynchronous multi-vendor library [Netdev](https://github.com/selfuryon/netdev).
+Primary goal is to simplify the means of collecting structured data from traditional networking equipment through the use of a consistent RESTful HTTP API.
 
-Raw output is then parsed and structured using the TextFSM templates provided by [NTC Templates](https://github.com/networktocode/ntc-templates)
+This is accomplished by leveraging existing libraries like [Netmiko](https://ktbyers.github.io/netmiko/), [NTC Templates](https://github.com/networktocode/ntc-templates), and [PyATS](https://developer.cisco.com/pyats/)
+
+Device connections are established through SSH since most organizations do not enable the built-in APIs of networking equipment.
 
 ## Development Installation
 
 ```bash
 git clone git@github.com:mtbutler07/network_api.git
 cd network_api
-python3 -m pip install pipenv
-python3 -m pipenv install
+poetry install
+poetry shell
+pre-commit install
 ```
 
 ## Development Usage
 
 ```bash
-python3.8 -m pipenv shell
+poetry shell
 uvicorn network_api.main:app --reload
 ```
 
 Docs are available at
 [http://127.0.0.1:8000](http://127.0.0.1:8000)
-
-## Resources
-
-This project was made possible using:
-
-- [FastAPI](https://github.com/tiangolo/fastapi)
-- [NTC Templates](https://github.com/networktocode/ntc-templates)
-- [Netdev](https://github.com/selfuryon/netdev)

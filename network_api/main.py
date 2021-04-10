@@ -1,10 +1,11 @@
-from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi import FastAPI
 
-from .routers import ios
+from network_api.routers import commands
 
 app = FastAPI()
 
-app.include_router(ios.router)
 app.include_router(
-    ios.router, prefix="/api/cisco/ios", tags=["ios"],
+    commands.router,
+    prefix="/api",
+    tags=["commands"],
 )
