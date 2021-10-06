@@ -6,7 +6,7 @@ name = "network_api"
 version = "0.1.0"
 
 [tool.poetry.dependencies]
-fastapi = "^0.63.0"
+fastapi = "^0.65.2"
 genie = "^21.3.1"
 netmiko = "^3.3.3"
 pyats = "^21.3"
